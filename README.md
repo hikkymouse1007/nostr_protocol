@@ -3,7 +3,7 @@
 https://github.com/nbd-wtf/nostr-tools#usage
 
 - result
-![スクリーンショット 2023-05-07 16 48 52](https://user-images.githubusercontent.com/54907440/236665240-78632159-3ae6-4151-9563-ff8eb74c4c11.png)
+![result](https://user-images.githubusercontent.com/54907440/236665240-78632159-3ae6-4151-9563-ff8eb74c4c11.png)
 
 
 - What are some of the challenges you faced while working on Phase 1?

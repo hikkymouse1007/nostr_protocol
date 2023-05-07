@@ -32,6 +32,7 @@ sub.on('event', event => {
   console.log('got event:', event)
 })
 
+
 let event = {
   kind: 1, // text_note
   created_at: Math.floor(Date.now() / 1000),
@@ -42,7 +43,6 @@ let event = {
 
 event.id = getEventHash(event)
 event.sig = signEvent(event, PRIVATE_KEY)
-
 
 // Send event to relay server
 let pub = relay.publish(event)
