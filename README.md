@@ -2,6 +2,7 @@
 - Implementation based on the repo below:
 https://github.com/nbd-wtf/nostr-tools#usage
 
+## week1
 - result
 ![スクリーンショット 2023-05-07 16 48 52](https://user-images.githubusercontent.com/54907440/236665240-78632159-3ae6-4151-9563-ff8eb74c4c11.png)
 
@@ -14,3 +15,11 @@ https://github.com/nbd-wtf/nostr-tools#usage
    - The server architecture can not handle the increased load from multiple connections, as with traditional WebSocket implementations.
    - In the event of a system failure, data restoration can not be performed correctly.
    - Ensuring the security and (if necessary, anonymity) of transmitted data.
+
+## Week2
+- References:
+  - https://speakerdeck.com/heguro/devtoolsdehazimerujian-dan-nostrpurotokoru-nostrmian-qiang-hui-number-0?slide=9
+  - https://achq.notion.site/Distributed-Systems-Project-Briefing-00eaa7a219954bb1a346d73bf09164f2
+  - https://scrapbox.io/nostr/NIP-01
+  - https://github.com/websockets/ws#api-docs
+

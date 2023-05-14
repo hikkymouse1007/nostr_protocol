@@ -1,7 +1,10 @@
 {
   "type": "module",
   "dependencies": {
+    "aws-sdk": "^2.1377.0",
     "nostr-tools": "^1.10.1",
-    "websocket-polyfill": "^0.0.3"
+    "uuid": "^9.0.0",
+    "websocket-polyfill": "^0.0.3",
+    "ws": "^8.13.0"
   }
 }

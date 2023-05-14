@@ -36,7 +36,7 @@ let event = {
   kind: 1, // text_note
   created_at: Math.floor(Date.now() / 1000),
   tags: [],
-  content: 'Hello from Tokyo',
+  content: 'Who is online now?',
   pubkey: PUB_KEY
 }
 
