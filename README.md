@@ -41,6 +41,8 @@ node relayServer.js
 ```
 node sampleNostr.js
 ```
+<img width="1426" alt="Stored data in DynamoDB" src="https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/6f99cbca-3a51-4cf7-840b-9af493cef115">
+
 
 ### Challenges faced:
 - It was challenging to determine the authentication method for the messages received on the server side and decide how to store the messages on the server using a specific type of database.
