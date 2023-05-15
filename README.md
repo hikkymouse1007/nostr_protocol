@@ -23,3 +23,25 @@ https://github.com/nbd-wtf/nostr-tools#usage
   - https://scrapbox.io/nostr/NIP-01
   - https://github.com/websockets/ws#api-docs
 
+### Setup
+- Run DynamoDB database server
+```
+docker compose up
+```
+- Initialize the database to create table
+```
+node createDB.js
+```
+- Start running relay server
+```
+node relayServer.js
+```
+
+- Send event to relay server
+```
+node sampleNostr.js
+```
+
+### Challenges faced:
+- It was challenging to determine the authentication method for the messages received on the server side and decide how to store the messages on the server using a specific type of database.
+- I was unsure about the appropriate handling of REQ and CLOSE data, which made it difficult to successfully implement them.

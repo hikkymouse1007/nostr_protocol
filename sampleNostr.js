@@ -32,9 +32,9 @@ event.id = getEventHash(event)
 event.sig = signEvent(event, PRIVATE_KEY)
 
 ws.onopen = function(e) {
-  // const req = JSON.stringify(['REQ', SUBSCRIPTION_ID])
-  // ws.send(req);
-  // console.log("Your sent request: ", req)
+  const req = JSON.stringify(['REQ', SUBSCRIPTION_ID])
+  ws.send(req);
+  console.log("Your sent request: ", req)
 
   const myEvent = JSON.stringify(['EVENT', event])
   ws.send(myEvent);
