@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: dynamodb_local
+    user: root
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /data  # 永続化するデータのファイルパス
+    volumes:
+      - ./dynamodb_data:/data  # データの永続化
+    ports:
+      - 8000:8000
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    container_name: dynamodb-admin
+    environment:
+      - DYNAMO_ENDPOINT=dynamodb-local:8000
+    ports:
+      - 8001:8001
+    depends_on:
+      - dynamodb-local
