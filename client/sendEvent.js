@@ -1,6 +1,4 @@
 import WebSocket from 'ws'
-import AWS from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
 import {
   signEvent,
   getEventHash,
@@ -25,22 +23,18 @@ event.id = getEventHash(event)
 event.sig = signEvent(event, PRIVATE_KEY)
 
 ws.onopen = function(e) {
-  const req = JSON.stringify(['REQ', SUBSCRIPTION_ID])
-  ws.send(req);
-  console.log("Your sent request: ", req)
-
   const myEvent = JSON.stringify(['EVENT', event])
   ws.send(myEvent);
   console.log("Your sent event: ", myEvent)
+};
+
+ws.onmessage = function(e) {
+  console.log("Received message from server: ", e.data);
+  console.log(`${ws.url} has accepted your event`);
+  // You can perform any further processing or checks on the received message here
 };
 
 setTimeout(() => {
   ws.close()
   console.log('connection closed')
 }, 10000)
-
-ws.onclose = function(event) {
-  const req = JSON.stringify(['CLOSE', '12j312n31knkajsndaksndas'])
-  ws.send(req);
-  console.log("Your unsubscribed: ", req)
-};
