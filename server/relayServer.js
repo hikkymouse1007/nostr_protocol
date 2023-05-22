@@ -80,12 +80,18 @@ server.on('connection', function connection(ws) {
 })
 
 const storeEventData = (eventMessage) => {
+  const messageItem =  {
+    id: eventMessage.id,
+    pubkey: eventMessage.pubkey,
+    created_at: new Date(eventMessage.created_at).toISOString(),
+    content: eventMessage.content,
+    sig: eventMessage.sig
+  }
+  console.log(messageItem)
+
   const params = {
     TableName: 'nostro-data-store',
-    Item: {
-      id: uuidv4(),
-      message: eventMessage
-    }
+    Item: messageItem
   }
 
   dynamoDB.put(params, (err, data) => {
@@ -96,3 +102,4 @@ const storeEventData = (eventMessage) => {
     }
   })
 }
+

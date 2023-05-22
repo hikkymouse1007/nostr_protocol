@@ -13,7 +13,7 @@ const PUB_KEY = 'c8c4d65e191a58054907c1596bfd793f5a02a24efdf477fc7634d0de45d6cb4
 
 let event = {
   kind: 1, // text_note
-  created_at: Math.floor(Date.now() / 1000),
+  created_at: Date.now(),
   tags: [],
   content: 'Yay! You\'re on Rails!',
   pubkey: PUB_KEY
@@ -35,6 +35,10 @@ ws.onmessage = function(e) {
 };
 
 setTimeout(() => {
+  const req = JSON.stringify(['CLOSE', SUBSCRIPTION_ID])
+  ws.send(req);
+  console.log("Your sent CLOSE request: ", req)
+
   ws.close()
   console.log('connection closed')
 }, 10000)
