@@ -18,7 +18,7 @@ const subscriptions = {}
 server.on('connection', function connection(ws) {
   let subscriptionId;
 
-  ws.on('message', function message(data) {
+  ws.on('message', async (data) => {
     try {
       const [action, ...params] = JSON.parse(data)
       switch (action) {
@@ -28,7 +28,7 @@ server.on('connection', function connection(ws) {
             throw new Error('Failed to verify signature')
           }
 
-          storeEventData(message)
+          await storeEventData(message)
           ws.send('ok')
 
           for (const subId in subscriptions) {
@@ -52,12 +52,9 @@ server.on('connection', function connection(ws) {
           subscriptionId = params[0]
           console.log('REQ: from ', subscriptionId)
           subscriptions[subscriptionId] = ws
-          console.log(subscriptions);
           break
         case 'CLOSE':
           const closeTargetSubId = params[0];
-          console.log(closeTargetSubId)
-          console.log(subscriptionId)
           if (closeTargetSubId === subscriptionId) {
             subscriptionId = null;
 
@@ -82,7 +79,7 @@ server.on('connection', function connection(ws) {
   })
 })
 
-const storeEventData = function(eventMessage) {
+const storeEventData = (eventMessage) => {
   const params = {
     TableName: 'nostro-data-store',
     Item: {
