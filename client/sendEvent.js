@@ -1,6 +1,4 @@
 import WebSocket from 'ws'
-import AWS from 'aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
 import {
   signEvent,
   getEventHash,
@@ -15,7 +13,7 @@ const PUB_KEY = 'c8c4d65e191a58054907c1596bfd793f5a02a24efdf477fc7634d0de45d6cb4
 
 let event = {
   kind: 1, // text_note
-  created_at: Math.floor(Date.now() / 1000),
+  created_at: Date.now(),
   tags: [],
   content: 'Yay! You\'re on Rails!',
   pubkey: PUB_KEY
@@ -25,22 +23,22 @@ event.id = getEventHash(event)
 event.sig = signEvent(event, PRIVATE_KEY)
 
 ws.onopen = function(e) {
-  const req = JSON.stringify(['REQ', SUBSCRIPTION_ID])
-  ws.send(req);
-  console.log("Your sent request: ", req)
-
   const myEvent = JSON.stringify(['EVENT', event])
   ws.send(myEvent);
   console.log("Your sent event: ", myEvent)
 };
 
+ws.onmessage = function(e) {
+  console.log("Received message from server: ", e.data);
+  console.log(`${ws.url} has accepted your event`);
+  // You can perform any further processing or checks on the received message here
+};
+
 setTimeout(() => {
+  const req = JSON.stringify(['CLOSE', SUBSCRIPTION_ID])
+  ws.send(req);
+  console.log("Your sent CLOSE request: ", req)
+
   ws.close()
   console.log('connection closed')
 }, 10000)
-
-ws.onclose = function(event) {
-  const req = JSON.stringify(['CLOSE', '12j312n31knkajsndaksndas'])
-  ws.send(req);
-  console.log("Your unsubscribed: ", req)
-};
