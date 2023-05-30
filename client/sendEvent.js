@@ -1,13 +1,12 @@
 import WebSocket from 'ws'
 import {
-  generatePrivateKey,
-  getPublicKey,
   signEvent,
   getEventHash,
 } from 'nostr-tools'
 import 'websocket-polyfill'
 
 const ws = new WebSocket("wss://floating-fortress-37708.herokuapp.com")
+
 const SUBSCRIPTION_ID = "12j312n31knkajsndaksndas";
 
 const PRIVATE_KEY = '402d72ee0fffc89444c095640fc4a93b33876fb14e1783cb64cf870b120218c2'
