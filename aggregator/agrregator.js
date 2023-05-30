@@ -1,11 +1,13 @@
 import WebSocket from 'ws';
+import amqp from 'amqplib';
 import { v4 as uuidv4 } from 'uuid'
 
 
 const SUBSCRIPTION_ID = uuidv4();
-const RELAY_ENDPOINTS = ['wss://relay.nekolicio.us/'];
+// const RELAY_ENDPOINTS = ['wss://relay.nekolicio.us/', 'wss://floating-fortress-37708.herokuapp.com'];
+const RELAYS = ['wss://relay.nekolicio.us/', 'wss://floating-fortress-37708.herokuapp.com'];
 
-RELAY_ENDPOINTS.forEach(relay => {
+RELAYS.forEach(relay => {
   // Connect to relay
   const ws = new WebSocket(relay);
 
@@ -21,6 +23,7 @@ RELAY_ENDPOINTS.forEach(relay => {
     if (action === 'EVENT') {
       // Store the event in the database
       const eventData = args[1];
+      console.log(message)
 
       console.log('pushed event to queue successfully!');
     }
