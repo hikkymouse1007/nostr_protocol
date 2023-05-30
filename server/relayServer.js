@@ -12,6 +12,7 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient({
   accessKeyId: 'fakeMyKeyId',
   secretAccessKey: 'fakeSecretAccessKey'
 })
+
 const server = new WebSocketServer({port: 8080})
 const subscriptions = {}
 

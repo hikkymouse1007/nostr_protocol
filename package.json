@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "amqplib": "^0.10.3",
     "aws-sdk": "^2.1377.0",
     "nostr-tools": "^1.10.1",
     "uuid": "^9.0.0",
