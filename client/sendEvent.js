@@ -5,7 +5,7 @@ import {
 } from 'nostr-tools'
 import 'websocket-polyfill'
 
-const ws = new WebSocket("ws://localhost:8080")
+const ws = new WebSocket("wss://floating-fortress-37708.herokuapp.com")
 const SUBSCRIPTION_ID = "12j312n31knkajsndaksndas";
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY
