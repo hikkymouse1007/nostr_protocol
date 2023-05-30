@@ -45,3 +45,11 @@ node sampleNostr.js
 ### Challenges faced:
 - It was challenging to determine the authentication method for the messages received on the server side and decide how to store the messages on the server using a specific type of database.
 - I was unsure about the appropriate handling of REQ and CLOSE data, which made it difficult to successfully implement them.
+
+### RabbitMQ
+- https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html
+- https://github.com/amqp-node/amqplib
+
+```
+RABBITMQ_ENDPOINT='amqp://myuser:mypassword@localhost:5672'
+```

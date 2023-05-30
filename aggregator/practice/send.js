@@ -7,7 +7,7 @@ const text = 'Hello World!';
 (async () => {
   let connection;
   try {
-    connection = await amqp.connect('amqp://myuser:mypassword@localhost:5672');
+    connection = await amqp.connect(process.env.RABBITMQ_ENDPOINT);
     const channel = await connection.createChannel();
 
     await channel.assertQueue(queue, { durable: false });

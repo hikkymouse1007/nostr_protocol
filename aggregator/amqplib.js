@@ -1,7 +1,7 @@
 import amqplib from 'amqplib';
 const queue = 'tasks';
 
-amqplib.connect('amqp://localhost:5672', (err, conn) => {
+amqplib.connect('amqp://myuser:mypassword@localhost:5672', (err, conn) => {
   if (err) throw err;
 
   // Listener
