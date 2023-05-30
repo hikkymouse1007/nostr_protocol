@@ -2,7 +2,7 @@ import WebSocket from 'ws'
 import 'websocket-polyfill'
 import { v4 as uuidv4 } from 'uuid'
 
-const ws = new WebSocket("ws://localhost:8080")
+const ws = new WebSocket("wss://floating-fortress-37708.herokuapp.com")
 const SUBSCRIPTION_ID = uuidv4();
 
 ws.onopen = function(e) {

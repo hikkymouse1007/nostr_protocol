@@ -1,5 +1,7 @@
 import WebSocket from 'ws'
 import {
+  generatePrivateKey,
+  getPublicKey,
   signEvent,
   getEventHash,
 } from 'nostr-tools'
@@ -8,8 +10,8 @@ import 'websocket-polyfill'
 const ws = new WebSocket("wss://floating-fortress-37708.herokuapp.com")
 const SUBSCRIPTION_ID = "12j312n31knkajsndaksndas";
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY
-const PUB_KEY = 'c8c4d65e191a58054907c1596bfd793f5a02a24efdf477fc7634d0de45d6cb4a'
+const PRIVATE_KEY = '402d72ee0fffc89444c095640fc4a93b33876fb14e1783cb64cf870b120218c2'
+const PUB_KEY = 'c570d91160e4fa61d353434e2ef80c0cc4d4700e39cad0b6187f5d2f568d2efa'
 
 let event = {
   kind: 1, // text_note
