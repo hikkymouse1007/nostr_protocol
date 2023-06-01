@@ -26,7 +26,7 @@ const AGGREGATOR_QUEUE_NAME = 'eventQueue';
       const eventData = JSON.parse(msg.content.toString());
       console.log('eventData consumed from MQ...', eventData);
 
-      // await storeEventData(message)
+      await storeEventData(eventData)
 
       // await prisma.aggregation_Event.create({
       //   data: {
@@ -51,10 +51,6 @@ const cleanup = async () => {
     // Close the RabbitMQ connection
     await queueService.closeChannel();
     console.log('Closed RabbitMQ connection');
-
-    // Disconnect Prisma client
-    await prisma.$disconnect();
-    console.log('Disconnected from Prisma');
   } catch (err) {
     console.error('Failed to clean up:', err);
     // Handle the error or rethrow it
@@ -93,18 +89,20 @@ process.on('unhandledRejection', async err => {
 });
 
 
-const storeEventData = (eventMessage) => {
-  const messageItem =  {
-    id: eventMessage.id,
-    pubkey: eventMessage.pubkey,
-    created_at: new Date(eventMessage.created_at).toISOString(),
-    content: eventMessage.content,
-    sig: eventMessage.sig
+const storeEventData = (eventData) => {
+  console.log(eventData)
+
+  const item =  {
+    id: eventData.id,
+    pubkey: eventData.pubkey,
+    created_at: eventData.created_at,
+    content: eventData.content,
+    sig: eventData.sig
   }
 
   const params = {
     TableName: 'nostro-data-store',
-    Item: messageItem
+    Item: item
   }
 
   dynamoDB.put(params, (err, data) => {

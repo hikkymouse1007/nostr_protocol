@@ -33,8 +33,11 @@ const AGGREGATOR_QUEUE_NAME = 'eventQueue';
         await queueService.publishToQueue(
           AGGREGATOR_QUEUE_NAME,
           JSON.stringify({
-            sig: eventData.sig,
-            payload: eventData.content,
+            id: eventData.id,
+            pubkey: eventData.pubkey,
+            created_at: new Date(eventData.created_at).toISOString(),
+            content: eventData.content,
+            sig: eventData.sig
           })
         );
 
