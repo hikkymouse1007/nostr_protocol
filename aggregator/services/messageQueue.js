@@ -19,7 +19,6 @@ class MessageQueueService {
   }
 
   async publishToQueue(queueName, data) {
-    console.log(queueName, data)
     try {
       await this.channel.assertQueue(queueName);
       this.channel.sendToQueue(queueName, Buffer.from(data));
