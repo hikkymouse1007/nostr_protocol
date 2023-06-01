@@ -1,12 +1,7 @@
-import AWS from 'aws-sdk'
 import 'websocket-polyfill'
+import DBClient from '../dbClient.js';
 
-const dynamoDB = new AWS.DynamoDB.DocumentClient({
-  region: 'us-east-1',
-  endpoint: 'http://localhost:8000',
-  accessKeyId: 'fakeMyKeyId',
-  secretAccessKey: 'fakeSecretAccessKey'
-})
+const client = new DBClient();
 
 import MessageQueueService from './messageQueue.js';
 
@@ -97,7 +92,7 @@ const storeEventData = (eventData) => {
     Item: item
   }
 
-  dynamoDB.put(params, (err, data) => {
+  client.docClient.put(params, (err, data) => {
     if (err) {
       console.error('Error storing data:', err)
     } else {
