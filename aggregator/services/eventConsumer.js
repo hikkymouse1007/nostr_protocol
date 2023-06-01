@@ -28,16 +28,8 @@ const AGGREGATOR_QUEUE_NAME = 'eventQueue';
 
       await storeEventData(eventData)
 
-      // await prisma.aggregation_Event.create({
-      //   data: {
-      //     sig: eventData.sig,
-      //     payload: eventData.payload,
-      //   },
-      // });
-      // console.log('stored event to DB successfully!');
-
       // // Acknowledge the message
-      // queueService.channel.ack(msg);
+      queueService.channel.ack(msg);
     } catch (err) {
       console.error(`Error occurred: ${err.message}`);
       // In case of an error, reject the message

@@ -51,6 +51,7 @@ node sampleNostr.js
 ### RabbitMQ
 - https://www.rabbitmq.com/tutorials/tutorial-one-javascript.html
 - https://github.com/amqp-node/amqplib
+- https://komari.co.jp/blog/4271/#ack
 
 ```
 RABBITMQ_ENDPOINT='amqp://myuser:mypassword@localhost:5672'

@@ -35,7 +35,7 @@ const AGGREGATOR_QUEUE_NAME = 'eventQueue';
           JSON.stringify({
             id: eventData.id,
             pubkey: eventData.pubkey,
-            created_at: new Date(eventData.created_at).toISOString(),
+            created_at: eventData.created_at,
             content: eventData.content,
             sig: eventData.sig
           })
