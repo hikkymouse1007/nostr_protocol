@@ -56,3 +56,59 @@ node sampleNostr.js
 ```
 RABBITMQ_ENDPOINT='amqp://myuser:mypassword@localhost:5672'
 ```
+
+
+## week5
+### Architecture
+You can find my websocket server-side repo here: https://github.com/hikkymouse1007/
+nostr_server
+
+![スクリーンショット 2023-06-04 19 23 38](https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/6b6f93e4-fe1f-4bb2-b34f-9c9d2847a6b6)
+
+### Usage
+- Run the command to start up your docker compose(including rabbitMQ and dynamoDB for local)
+```
+docker compose up
+```
+- Open another terminal window and run aggregator.js
+```
+node aggregator/aggregator.js
+```
+
+You can add as many available websocket servers as you want to the array const RELAYS:
+```
+const RELAYS = ['wss://relay.nekolicio.us/', 'wss://floating-fortress-37708.herokuapp.com'];
+```
+and you can see the log below:
+![スクリーンショット 2023-06-04 19 23 38](https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/8b39ddbe-2131-454f-8f89-c32b03db3cc3)
+
+
+- Open another window and run eventConsumer.js to consume enqueued event queues and store them to your local DynamoDB database
+```
+node aggregator/services/eventConsumer.js
+```
+![スクリーンショット 2023-06-04 19 17 18](https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/8307750f-f448-46ac-a2e7-7c89b97e2b92)
+
+
+You can see the stored data on your localhost:8001:
+![スクリーンショット 2023-06-04 19 23 38](https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/ba8ce570-1fb7-4554-95b9-e8160e5e650d)
+
+
+- You can see the data by running dbWatcher.js which fetches latest event created within 30 seconds before dbWatcher runs every 10 seconds from your local DynamoDB
+```
+node dbWatcher
+```
+![スクリーンショット 2023-06-04 19 23 38](https://github.com/hikkymouse1007/nostr_protocol/assets/54907440/3f5b2cec-8757-42c6-b6ef-827a3fb9f0c7)
+
+However, this code has some problems:
+  - You have to scan all data in the table for the aggregator every time dbWatcher runs due to the feature of scanning of DynamoDB
+  - You can not see every single data precisely depending on the timing the code runs
+
+But this is for not fetching duplicated data more than once as possible.
+
+## Acknowledgment
+I would like to extend my heartfelt thanks to Kyle for his exceptional contribution in the development of the nostro-server implementation using JavaScript. I found immense value in referring to [Kyle](https://github.com/kylemocode)'s repository (https://github.com/kylemocode/nostr-distributed-system-exercise/tree/main/nostr-aggregator) during my work.
+
+His code provided valuable insights into utilizing the nostr-tools and amqplib libraries, enabling me to better understand how to establish communication with the nostro-server and implement queueing functionalities. I am truly grateful for his invaluable assistance.
+
+I would like to take this opportunity to express my sincere appreciation.
